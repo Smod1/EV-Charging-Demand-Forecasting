@@ -7,4 +7,34 @@ Four forecasting models are implemented behind a shared interface: a Ridge Regre
 
 The project includes a fully interactive Streamlit dashboard allowing users to select a forecasting model, view a 24-hour ahead demand forecast with confidence bands, explore a day-by-hour demand heatmap, compare model performance visually, and download forecast output as a CSV — making the system accessible to non-technical stakeholders.
 
-Tech stack: Python, scikit-learn, XGBoost, PyTorch, pandas, NumPy, Plotly, Matplotlib, Streamlit
+Tech stack: Python, scikit-learn, XGBoost, pandas, NumPy, Plotly, Matplotlib, Streamlit
+
+To use this project!!
+1.Ensure the following dependencies are installed:
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+xgboost>=2.0
+statsmodels>=0.14
+matplotlib>=3.7
+plotly>=5.17
+streamlit>=1.30
+joblib>=1.3
+pyarrow>=14.0     
+
+2. Train all models:
+python train.py
+
+3. Launch the dashboard:
+py -m streamlit run ev_charging_forecast\dashboard\app.py
+
+4. Open the dashboard (if not automatically opened):
+Open http://localhost:8501 in your browser.
+
+Here are the full names for the evaluation metrics:
+- RMSE – Root Mean Squared Error (penalises large errors)
+- MAE  – Mean Absolute Error (interpretable in kWh)
+- MAPE – Mean Absolute Percentage Error (scale-independent)
+- R²   – Coefficient of determination (1 = perfect)
+
+
