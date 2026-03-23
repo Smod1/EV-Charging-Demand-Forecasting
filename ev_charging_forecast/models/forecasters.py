@@ -45,10 +45,8 @@ class BaseForecaster:
     def fit_predict(self, X_train, y_train, X_test, y_test):
         self.fit(X_train, y_train)
         predictions = self.predict(X_test)
-        if hasattr(y_test, "values"): #If there is a test and values then we return the evaluation of the model for the test
-            return evaluate(y_test.values)
-        else:
-            return y_test, preds, self.name
+        y_true = y_test.values if hasattr(y_test, "values") else y_test
+        return evaluate(y_true, predictions, self.name)
 
     def save(self):
         joblib.dump(self, SAVE_DIR / f"{self.name}.pkl") #saves as a pickle file 
@@ -125,10 +123,6 @@ class RandomForestForecaster(BaseForecaster):
     #E.g. was it lags or rolling stats or cyclical nature?
 
 
-# ─────────────────────────────────────────────
-# 4. XGBoost
-# ─────────────────────────────────────────────
-
 class XGBoostForecaster(BaseForecaster):
     name = "XGBoost"
 
@@ -190,3 +184,4 @@ if __name__ == "__main__":
     print("\nSummary:")
     summary = pd.DataFrame(results).sort_values("RMSE") #ascending by default
     print(summary.to_string(index=False)) #prints summary table without row indices to show performance of all models.
+
